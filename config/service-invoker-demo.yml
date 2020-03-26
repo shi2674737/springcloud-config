@@ -50,3 +50,9 @@ ribbon:
   NFLoadBalancerPingClassName: com.netflix.loadbalancer.DummyPing
   #服务列表获取
   NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+
+data:
+  address: test
+  user:
+    username: name
+    password: password
