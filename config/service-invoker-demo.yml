@@ -52,7 +52,7 @@ ribbon:
   NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
 
 data:
-  address: test
+  address: test1
   user:
     username: name
     password: password
