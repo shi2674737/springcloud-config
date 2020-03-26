@@ -1,6 +1,3 @@
-spring:
-  application:
-    name: serice-config-demo
 eureka:
   client:
     register-with-eureka: true
