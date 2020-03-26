@@ -61,7 +61,7 @@ management:
         include: "*"
 
 data:
-  address: test2
+  address: test
   user:
     username: name
     password: password
