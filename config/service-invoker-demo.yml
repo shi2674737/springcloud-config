@@ -51,6 +51,15 @@ ribbon:
   #服务列表获取
   NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
 
+management:
+  endpoint:
+    shutdown:
+      enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
 data:
   address: test1
   user:
