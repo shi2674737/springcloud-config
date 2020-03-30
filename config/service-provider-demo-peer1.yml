@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8061
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/cloud_test?useSSL=false
