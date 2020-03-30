@@ -1,0 +1,56 @@
+server:
+  port: 8071
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/cloud_test?useSSL=false
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+    test-on-borrow: true
+    test-while-idle: true
+    validation-query: SELECT 1
+    time-between-eviction-runs-millis: 5000
+    min-evictable-idle-time-millis: 60000
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          lowerCaseServiceId: true
+          # 是否和服务注册与发现组件结合，设置为 true 后可以直接使用应用名称调用服务
+          enabled: true
+      # 路由（routes：路由，它由唯一标识（ID）、目标服务地址（uri）、一组断言（predicates）和一组过滤器组成（filters）。filters 不是必需参数。）
+      routes:
+        # 路由标识（id：标识，具有唯一性）   转发指定地址并传入参数
+        - id: service-invoker-demo
+          # 目标服务地址（uri：地址，请求转发后的地址）
+          # lb代表从注册中心获取服务
+          uri: lb://service-invoker-demo
+          # uri: http://localhost:9000
+          # 路由条件（predicates：断言，匹配 HTTP 请求内容）
+          predicates:
+            ## 匹配 GET 请求
+            #- Method=GET
+            - Path=/invoker1/**
+          # 过滤器（filters：过滤器，过滤规则）
+          filters:
+            ## 去除前缀
+            - StripPrefix=1
+              # 基于redis的限流
+#              name: TestResolver
+#              args:
+#                redis-rate-limiter.replenishRate: 1
+#                redis-rate-limiter.burstCapacity: 2
+#                key-resolver: '#{@testKeyResolver}'
+
+eureka:
+  client:
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:9861/eureka/
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}
+
+jwt-config:
+  secretKey: test
+  ttlMillis: 30000
